@@ -12,4 +12,5 @@ public interface JokeClient {
 
     @GET("/jokes/random?category=dev")
     Call<JokeModel> getNewJoke();
+
 }

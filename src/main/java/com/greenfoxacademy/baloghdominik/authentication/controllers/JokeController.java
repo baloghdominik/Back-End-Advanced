@@ -3,6 +3,7 @@ package com.greenfoxacademy.baloghdominik.authentication.controllers;
 import com.greenfoxacademy.baloghdominik.authentication.models.SavedJokeModel;
 import com.greenfoxacademy.baloghdominik.authentication.repositories.SavedJokeModelRepository;
 import com.greenfoxacademy.baloghdominik.authentication.services.JokeService;
+import com.greenfoxacademy.baloghdominik.authentication.services.TranslateString;
 import com.greenfoxacademy.baloghdominik.authentication.services.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,16 +30,19 @@ public class JokeController {
     private Validation validation;
 
     @Autowired
+    private TranslateString translateString;
+
+    @Autowired
     private SavedJokeModelRepository savedJokeModelRepository;
 
     public String jokeToSave;
 
     @GetMapping(value = {"", "/"})
-    public String Jokes(Model model, HttpServletRequest response) throws NoSuchAlgorithmException {
+    public String Jokes(Model model, HttpServletRequest response) throws Exception {
         jokeService.jokeFromAPI();
 
         if (validation.isLoggedIn(response)) {
-            jokeToSave = jokeService.TheJoke;
+            jokeToSave = translateString.translateIt(jokeService.TheJoke);
             model.addAttribute("joke", jokeToSave);
             model.addAttribute("username", validation.getLoggedInUsername(response));
             model.addAttribute("savedJokes",
@@ -46,7 +50,7 @@ public class JokeController {
                     validation.getLoggedInUsername(response)));
             return "index";
         } else {
-            model.addAttribute("joke", jokeService.TheJoke);
+            model.addAttribute("joke", translateString.translateIt(jokeService.TheJoke));
             return "new";
         }
     }
