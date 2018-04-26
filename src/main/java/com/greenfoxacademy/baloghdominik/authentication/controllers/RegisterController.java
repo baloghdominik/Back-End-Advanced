@@ -47,7 +47,8 @@ public class RegisterController {
                                     userModelRepository.save(new UserModel(username, password));
                                     model.addAttribute("error", false);
                                     model.addAttribute( "success", true);
-                                    model.addAttribute("errorMessage", "You registered successfully! Please sign in!");
+                                    model.addAttribute("errorMessage",
+                                            "You registered successfully! Please sign in!");
                                     return "login";
                                 } else {
                                     model.addAttribute("error", true);

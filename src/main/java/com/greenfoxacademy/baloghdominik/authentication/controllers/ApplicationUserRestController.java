@@ -20,7 +20,7 @@ public class ApplicationUserRestController {
     @Autowired
     UserModelRepository userModelRepository;
 
-    @PostMapping(value = {"/sign_up"})
+    @PostMapping(value = {"/signup"})
     public ResponseEntity register(@RequestBody(required = true) UserModel newUserModel) {
         if (newUserModel != null) {
             userModelRepository.save(newUserModel);

@@ -32,18 +32,6 @@
             -webkit-transition: 1s ease-in-out;
             transition: 1s ease-in-out;
         }
-
-        #rmJoke {
-            color: #12bbad;
-            -webkit-transition: 1s ease-in-out;
-            transition: 1s ease-in-out;
-        }
-
-        #rmJoke:hover {
-            color: #0f988d;
-            -webkit-transition: 1s ease-in-out;
-            transition: 1s ease-in-out;
-        }
     </style>
 </head>
 <body>
@@ -54,7 +42,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-            <a class="btn navbar-btn btn-primary ml-2 text-white" th:href="@{/instantlogout}"> <i  style="color: #fff" class="fa d-inline fa-lg fa-user-circle"></i> <span th:text="${username}"></span></a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../login2">
+                        <i style="color: #fff" class="fa d-inline fa-lg fa-user"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../register">
+                        <i style="color: #fff" class="fa d-inline fa-lg fa-user-plus"></i> Register</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -74,33 +71,13 @@
                 <div class="jumbotron">
                     <p th:text="${joke}"></p>
                     <p>
-                        <a class="btn btn-primary btn-xl" th:href="@{/save}" role="button">
-                            <i style="color: #fff" class="fa fa-xl fa-bookmark"></i>
+                        <a class="btn btn-primary btn-xl" th:href="@{/register}" role="button">
+                            <i style="color: #fff" class="fa fa-xl fa-user-plus"></i>
                         </a>
                         <a class="btn btn-primary btn-xl" th:href="@{/next}" role="button">
                             <i style="color: #fff" class="fa fa-xl fa-arrow-right"></i>
                         </a>
                     </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12" th:each="jokes : ${savedJokes}">
-                <div class="alert alert-primary" role="alert">
-                    <div class="row">
-                        <div class="col-md-11">
-                            <p th:text="${jokes.joke}"></p>
-                        </div>
-                        <div class="col-md-1">
-                            <a th:href="'/delete?id=' + ${jokes.getId()}">
-                                <i id="rmJoke" class="fa fa-lg fa-trash"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

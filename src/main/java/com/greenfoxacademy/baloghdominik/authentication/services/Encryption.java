@@ -20,7 +20,9 @@ public class Encryption {
         if (hashedPass.length() < 32) {
             hashedPass = "0" + hashedPass;
         }
-        return  hashedPass;
+        return hashedPass;
     }
+
+
 
 }
