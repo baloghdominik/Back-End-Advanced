@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+    <title>Chuck Norris Jokes</title>
+    <meta name="author" content="Pingendo">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="todo.css" type="text/css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        i {
+            color: #12bbad;
+        }
+        #check:hover {
+            color: green;
+            -webkit-transition: 1s ease-in-out;
+            transition: 1s ease-in-out;
+        }
+        #delete:hover {
+            color: red;
+            -webkit-transition: 1s ease-in-out;
+            transition: 1s ease-in-out;
+        }
+        #done:hover {
+            color: green;
+            -webkit-transition: 1s ease-in-out;
+            transition: 1s ease-in-out;
+        }
+
+        #rmJoke {
+            color: #12bbad;
+            -webkit-transition: 1s ease-in-out;
+            transition: 1s ease-in-out;
+        }
+
+        #rmJoke:hover {
+            color: #0f988d;
+            -webkit-transition: 1s ease-in-out;
+            transition: 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark" >
+    <div class="container">
+        <a class="navbar-brand" href="#">Jokes</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../settings">
+                        <i style="color: #fff" class="fa d-inline fa-lg fa-cogs"></i> Settings</a>
+                </li>
+            </ul>
+            <a class="btn navbar-btn btn-primary ml-2 text-white" th:href="@{/instantlogout}"> <i  style="color: #fff" class="fa d-inline fa-lg fa-user-circle"></i> <span th:text="${username}"></span></a>
+        </div>
+    </div>
+</nav>
+<div class="text-center h-50 py-5" style="background-image: url(todo.png);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!--<h1 class="text-capitalize display-1">Jokes</h1>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <p th:text="${joke}"></p>
+                    <p>
+                        <a class="btn btn-primary btn-xl" th:href="@{/save}" role="button">
+                            <i style="color: #fff" class="fa fa-xl fa-bookmark"></i>
+                        </a>
+                        <a class="btn btn-primary btn-xl" th:href="@{/next}" role="button">
+                            <i style="color: #fff" class="fa fa-xl fa-arrow-right"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" th:each="jokes : ${savedJokes}">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <p th:text="${jokes.joke}"></p>
+                        </div>
+                        <div class="col-md-1">
+                            <a th:href="'/delete?id=' + ${jokes.getId()}">
+                                <i id="rmJoke" class="fa fa-lg fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-4">
+   <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="progress my-4">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" th:style="'width:'+ ${percentage} +'%'" th:aria-valuenow="''+ ${percentage}+ ''" aria-valuemin="0" aria-valuemax="100" th:text="${percentage} + '%'"></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+<script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

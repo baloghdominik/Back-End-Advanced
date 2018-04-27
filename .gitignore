@@ -16,13 +16,7 @@
 *.iws
 *.iml
 *.ipr
-/out/
-/gradle/
 /.gradle/
-*.gradle
-*.bat
-*.gradlew
-gradlew
 
 ### NetBeans ###
 /nbproject/private/
