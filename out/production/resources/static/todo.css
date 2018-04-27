@@ -2728,8 +2728,10 @@ tbody.collapse.show {
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 0.25rem; }
-  .navbar-toggler:hover, .navbar-toggler:focus {
-    text-decoration: none; }
+  .navbar-toggler:hover, .navbar-toggler:focus, .navbar-toggler:active {
+    text-decoration: none;
+    outline-color: #fff;
+  }
   .navbar-toggler:not(:disabled):not(.disabled) {
     cursor: pointer; }
 
