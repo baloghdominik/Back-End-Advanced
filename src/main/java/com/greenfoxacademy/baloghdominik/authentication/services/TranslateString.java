@@ -1,10 +1,10 @@
 package com.greenfoxacademy.baloghdominik.authentication.services;
 
-import org.springframework.stereotype.Service;
-
 /**
  * Created by baloghdominik on 2018. 04. 26..
  */
+
+import org.springframework.stereotype.Service;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateOptions;
@@ -13,7 +13,7 @@ import com.google.cloud.translate.Translation;
 @Service
 public class TranslateString {
 
-    public String translateIt(String toTranslate) throws Exception {
+    public String translateIt(String toTranslate, String lang) throws Exception {
         Translate translate = TranslateOptions.getDefaultInstance().getService();
 
         String text = toTranslate;
@@ -22,9 +22,12 @@ public class TranslateString {
                 translate.translate(
                         text,
                         TranslateOption.sourceLanguage("en"),
-                        TranslateOption.targetLanguage("hu"));
+                        TranslateOption.targetLanguage(lang));
 
+        String translated = new String(translation.getTranslatedText().getBytes(), "UTF8");
 
-       return translation.getTranslatedText();
+        String replace = translated.replace("&quot;", "\"");
+
+       return replace;
     }
 }

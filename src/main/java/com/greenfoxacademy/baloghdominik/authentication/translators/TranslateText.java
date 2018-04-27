@@ -1,3 +1,4 @@
+/*
 package com.greenfoxacademy.baloghdominik.authentication.translators;
 
 import com.google.cloud.translate.Detection;
@@ -13,12 +14,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class TranslateText {
-    /**
+    */
+/**
      * Detect the language of input text.
      *
      * @param sourceText source text to be detected for language
      * @param out print stream
-     */
+     *//*
+
     public static void detectLanguage(String sourceText, PrintStream out) {
         Translate translate = createTranslateService();
         List<Detection> detections = translate.detect(ImmutableList.of(sourceText));
@@ -28,12 +31,14 @@ public class TranslateText {
         }
     }
 
-    /**
+    */
+/**
      * Translates the source text in any language to English.
      *
      * @param sourceText source text to be translated
      * @param out print stream
-     */
+     *//*
+
     public static void translateText(String sourceText, PrintStream out) {
         Translate translate = createTranslateService();
         Translation translation = translate.translate(sourceText);
@@ -41,7 +46,8 @@ public class TranslateText {
         out.printf("Translated Text:\n\t%s\n", translation.getTranslatedText());
     }
 
-    /**
+    */
+/**
      * Translate the source text from source to target language.
      * Make sure that your project is whitelisted.
      *
@@ -49,7 +55,8 @@ public class TranslateText {
      * @param sourceLang source language of the text
      * @param targetLang target language of translated text
      * @param out print stream
-     */
+     *//*
+
     public static void translateTextWithOptionsAndModel(
             String sourceText,
             String sourceLang,
@@ -70,14 +77,16 @@ public class TranslateText {
     }
 
 
-    /**
+    */
+/**
      * Translate the source text from source to target language.
      *
      * @param sourceText source text to be translated
      * @param sourceLang source language of the text
      * @param targetLang target language of translated text
      * @param out print stream
-     */
+     *//*
+
     public static void translateTextWithOptions(
             String sourceText,
             String sourceLang,
@@ -94,12 +103,14 @@ public class TranslateText {
                 translation.getTranslatedText());
     }
 
-    /**
+    */
+/**
      * Displays a list of supported languages and codes.
      *
      * @param out print stream
      * @param tgtLang optional target language
-     */
+     *//*
+
     public static void displaySupportedLanguages(PrintStream out, Optional<String> tgtLang) {
         Translate translate = createTranslateService();
         LanguageListOption target = LanguageListOption.targetLanguage(tgtLang.orElse("en"));
@@ -110,11 +121,13 @@ public class TranslateText {
         }
     }
 
-    /**
+    */
+/**
      * Create Google Translate API Service.
      *
      * @return Google Translate Service
-     */
+     *//*
+
     public static Translate createTranslateService() {
         return TranslateOptions.newBuilder().build().getService();
     }
@@ -145,3 +158,4 @@ public class TranslateText {
         }
     }
 }
+*/

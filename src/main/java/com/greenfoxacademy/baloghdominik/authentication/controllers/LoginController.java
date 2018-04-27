@@ -72,7 +72,7 @@ public class LoginController {
                         cookieID.setMaxAge(100000);
                         response.addCookie(cookieID);
 
-                    return "redirect:/";
+                    return "redirect:/load";
                 } else {
                     model.addAttribute("error", true);
                     model.addAttribute("errorMessage",
