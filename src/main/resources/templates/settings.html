@@ -108,6 +108,45 @@
         </div>
     </div>
 </div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Current topic: <b th:text="${currentTopic}"></b></p>
+                        </div>
+                    </div>
+                </div>
+                <form action="#" th:action="@{/topic}" method="POST">
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <select name="topic" class="col-12 form-group">
+                            <option default value="dev">DEV</option>
+                            <option value="food">Food</option>
+                            <option value="celebrity">Celebrity</option>
+                            <option value="sport">Sport</option>
+                            <option value="animal">Animal</option>
+                            <option value="history">History</option>
+                            <option value="music">Music</option>
+                            <option value="travel">Travel</option>
+                            <option value="career">Career</option>
+                            <option value="money">Money</option>
+                            <option value="movie">Movie</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
 <div class="py-4">
 </div>
 <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>

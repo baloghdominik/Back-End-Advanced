@@ -2,8 +2,10 @@ package com.greenfoxacademy.baloghdominik.authentication.controllers;
 
 import com.greenfoxacademy.baloghdominik.authentication.models.LanguageModel;
 import com.greenfoxacademy.baloghdominik.authentication.models.SavedJokeModel;
+import com.greenfoxacademy.baloghdominik.authentication.models.TopicModel;
 import com.greenfoxacademy.baloghdominik.authentication.repositories.LanguageModelRepository;
 import com.greenfoxacademy.baloghdominik.authentication.repositories.SavedJokeModelRepository;
+import com.greenfoxacademy.baloghdominik.authentication.repositories.TopicModelRepository;
 import com.greenfoxacademy.baloghdominik.authentication.services.JokeService;
 import com.greenfoxacademy.baloghdominik.authentication.services.TranslateString;
 import com.greenfoxacademy.baloghdominik.authentication.services.Validation;
@@ -37,6 +39,8 @@ public class JokeController {
 
     private LanguageModelRepository languageModelRepository;
 
+    private TopicModelRepository topicModelRepository;
+
     private String jokeToSave;
 
     @Autowired
@@ -44,17 +48,19 @@ public class JokeController {
                           Validation validation,
                           TranslateString translateString,
                           SavedJokeModelRepository savedJokeModelRepository,
-                          LanguageModelRepository languageModelRepository) {
+                          LanguageModelRepository languageModelRepository,
+                          TopicModelRepository topicModelRepository) {
         this.jokeService = jokeService;
         this.validation = validation;
         this.translateString = translateString;
         this.savedJokeModelRepository = savedJokeModelRepository;
         this.languageModelRepository = languageModelRepository;
+        this.topicModelRepository = topicModelRepository;
     }
 
     @GetMapping(value = {"", "/"})
     public String Jokes(Model model, HttpServletRequest response) throws Exception {
-        jokeService.jokeFromAPI();
+        jokeService.jokeFromAPI(response);
 
         if (validation.isLoggedIn(response)) {
             jokeToSave = selectLanguage(response);
@@ -84,7 +90,7 @@ public class JokeController {
 
     @GetMapping(value = {"/load"})
     public String loadJoke(HttpServletRequest response) throws Exception {
-        jokeService.jokeFromAPI();
+        jokeService.jokeFromAPI(response);
         jokeToSave = selectLanguage(response);
         return "redirect:/";
     }
@@ -123,6 +129,12 @@ public class JokeController {
                 model.addAttribute("currentLang", languageModelRepository.findOneByUsername(
                         validation.getLoggedInUsername(response)).getLanguage().toUpperCase());
             }
+            if (topicModelRepository.findOneByUsername(validation.getLoggedInUsername(response)) == null){
+                model.addAttribute("currentTopic", "DEV");
+            } else {
+                model.addAttribute("currentTopic", topicModelRepository.findOneByUsername(
+                        validation.getLoggedInUsername(response)).getTopic().toUpperCase());
+            }
             return "settings";
         } else {
             return "redirect:/login2";
@@ -146,6 +158,22 @@ public class JokeController {
         }
     }
 
+    @PostMapping(value = "/topic")
+    public String setTopic(@ModelAttribute(name = "topic") String topic, Model model, HttpServletRequest response) throws Exception {
+        if (validation.isLoggedIn(response)) {
+            if (topicModelRepository.findOneByUsername(validation.getLoggedInUsername(response)) != null){
+                TopicModel currentTopicModel = topicModelRepository.findOneByUsername(validation.getLoggedInUsername(response));
+                currentTopicModel.setTopic(topic);
+                topicModelRepository.save(currentTopicModel);
+            } else {
+                topicModelRepository.save(new TopicModel(validation.getLoggedInUsername(response), topic));
+            }
+            model.addAttribute("username", validation.getLoggedInUsername(response));
+            return "redirect:/";
+        } else {
+            return "redirect:/login2";
+        }
+    }
 
     @GetMapping(value = "/instantlogout")
     public String logout(HttpServletResponse response) {
