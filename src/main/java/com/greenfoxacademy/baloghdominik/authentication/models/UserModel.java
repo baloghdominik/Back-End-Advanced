@@ -14,9 +14,6 @@ import javax.persistence.Id;
  */
 
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
 public class UserModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
